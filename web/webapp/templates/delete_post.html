@@ -1,0 +1,49 @@
+{% extends 'base.html '%}
+{% block title %} Delete Blog Post{% endblock %}
+{% block content %}
+
+
+{% if user.is_authenticated %}
+    {% if user.id == post.author.id %}
+
+    <div class="card">
+        <h5 class="card-header">Delete Post...</h5>
+        <div class="card-body">
+          <h5 class="card-title">Delete: <small>{{ post.title }}</small></h5>
+          <p class="card-text">
+          <form method="POST">
+            {% csrf_token %}
+              <strong>Are you sure?!</strong><br/><br/>
+              <button class="btn btn-secondary">Delete Post!</button>
+          </form>
+          </p>
+        </div>
+    </div>
+
+       
+    {% else %}
+        You're not allowed here! (and you know it...)
+    {% endif %}
+        
+{% else %}
+
+You're not allowed here! (and you know it...)
+
+{% endif %}
+
+{% endblock %}
+
+{% comment %} 
+ <h1>Delete Post...</h1>
+        <br/><br/>
+        <h3>Delete: {{ post.title }}</h3>
+
+        <br/>
+        <div class="form-group">
+            <form method="POST">
+                {% csrf_token %}
+                <strong>Are you sure?!</strong><br/><br/>
+                <button class="btn btn-secondary">Delete Post!</button>
+            </form>
+        </div>
+ {% endcomment %}
